@@ -17,12 +17,12 @@ import com.example.traders.presentation.dialogs.depositDialog.DepositDialogFragm
 import com.example.traders.presentation.profile.ProfileFragmentDirections
 import com.example.traders.presentation.profile.adapters.PortfolioListAdapter
 import com.example.traders.presentation.watchlist.adapters.SingleCryptoListener
+import com.example.traders.utils.Colors
 import com.github.mikephil.charting.components.Legend
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class PortfolioFragment : BaseFragment() {
@@ -89,7 +89,7 @@ class PortfolioFragment : BaseFragment() {
     private fun FragmentPortfolioBinding.updateUiData(state: PortfolioState) {
         if (state.chartReadyForUpdate) {
             val pieDataSet = PieDataSet(state.chartData, "Portfolio")
-            pieDataSet.setColors(state.colors)
+            pieDataSet.setColors(Colors.pieChartColors)
             pieChart.data = PieData(pieDataSet)
             pieChart.invalidate()
             pieChart.animate()
@@ -108,7 +108,7 @@ class PortfolioFragment : BaseFragment() {
     private fun updateChartAndAdapterData() {
         if (viewModel.state.value.chartDataLoaded) {
             val pieDataSet = PieDataSet(viewModel.state.value.chartData, "Portfolio")
-            pieDataSet.setColors(viewModel.state.value.colors)
+            pieDataSet.setColors(Colors.pieChartColors)
             binding.pieChart.data = PieData(pieDataSet)
             binding.pieChart.invalidate()
             binding.pieChart.animate()
